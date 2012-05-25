@@ -4,7 +4,7 @@
 
 class mongodb(
   $data_dir  = '/var/lib/mongodb',
-  $log_file  = '/var/log/mongodb/mongdb.log',
+  $log_dir  = '/var/log/mongodb',
   $bind_ip   = '127.0.0.1',
   $auth      = false
 ){
@@ -12,7 +12,7 @@ class mongodb(
     CentOS:{
       class{"mongodb::install":
         data_dir    => $data_dir,
-        log_file    => $log_file,
+        log_dir    => $log_dir,
         bind_ip     => $bind_ip,
         auth        => $auth,
       }

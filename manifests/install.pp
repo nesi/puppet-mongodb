@@ -4,7 +4,7 @@
 
 class mongodb::install(
   $data_dir,
-  $log_file,
+  $log_dir,
   $bind_ip,
   $auth
 ){
@@ -20,10 +20,10 @@ class mongodb::install(
     require => [Package['mongodb-server'],User['mongodb']],
   }
 
-  file{$log_file:
+  file{$log_dir:
     ensure  => directory,
     owner   => 'mongodb',
-    group   => root,
+    group   => 'mongodb',
     require => [Package['mongodb-server'],User['mongodb']],
   }
 
@@ -33,13 +33,13 @@ class mongodb::install(
     group   => root,
     path    => '/etc/mongodb.conf',
     content => template('mongodb/mongodb.conf.erb'),
-    require => File[$data_dir, $log_file],
+    require => File[$data_dir, $log_dir],
     notify  => Service['mongod'],
   }
 
   service{"mongod":
     name => "mongod",
-    require => [Package["mongodb-server"],File[$data_dir,$log_file,'mongdb_conf']],
+    require => [Package["mongodb-server"],File[$data_dir,$log_dir,'mongdb_conf']],
     ensure => running,
     enable => true,
     hasstatus => true,
