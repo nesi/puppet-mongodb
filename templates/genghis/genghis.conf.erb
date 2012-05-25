@@ -2,10 +2,9 @@
     ServerAdmin root@localhost
     DocumentRoot <%= web_root %>
     <Directory <%= app_root %>>
-        DirectoryIndex genghis.php
+        DirectoryIndex index.html index.php genghis.php
+        AllowOverride None
+        Options Indexes FollowSymLinks
         Allow from all
-        ErrorLog /var/log/httpd/genghis_error.log
-        LogLevel warn
-        CustomLog /var/log/httpd/genghis_access.log combined
     </Directory>
 </VirtualHost>
