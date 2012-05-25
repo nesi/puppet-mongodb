@@ -21,6 +21,6 @@ class mongodb::web::genghis::install(
     path    => '/etc/httpd/conf.d/genghis.conf',
     content => template('mongodb/genghis/genghis.conf.erb'),
     notify  => Service['apache'],
-    require => [Class['mongodb::web::genghis::download'],Service['mongod'],Package['php-pecl-mongo']],
+    require => [Service['mongod'],Package['php-pecl-mongo']],
   }
 }
