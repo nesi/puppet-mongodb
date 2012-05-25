@@ -12,7 +12,8 @@ class mongodb::web::genghis::download(
     path      => ['/usr/bin'],
     command   => "git clone -b master git://github.com/bobthecow/genghis.git ${app_root}",
     creates   => $app_root,
-    require   => [Service['mongod','apache'],Package['mod_php','php-pecl-mongo']],
+    require   => [Service['mongod'],Package['mod_php','php-pecl-mongo']],
+    notify    => Service['apache'],
   }
 
 }
