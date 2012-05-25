@@ -38,12 +38,12 @@ class mongodb::install(
   }
 
   service{"mongod":
-    name => "mongod",
-    require => [Package["mongodb-server"],File[$data_dir,$log_dir,'mongdb_conf']],
     ensure => running,
+    name => "mongod",
     enable => true,
     hasstatus => true,
     hasrestart => true,
+    require => [Package["mongodb-server"],File[$data_dir,$log_dir,'mongdb_conf']],
   }
 
 }
