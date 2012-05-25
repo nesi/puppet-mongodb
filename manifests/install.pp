@@ -32,7 +32,7 @@ class mongodb::install(
     owner   => root,
     group   => root,
     path    => '/etc/mongodb.conf',
-    content => template('mongodb/mongdb.conf.erb'),
+    content => template('mongodb/mongodb.conf.erb'),
     require => File[$data_dir, $log_file],
     # notify  => Service['mongod'],
   }
