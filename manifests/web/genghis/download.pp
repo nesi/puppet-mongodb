@@ -11,6 +11,7 @@ class mongodb::web::genghis::download(
     user      => root,
     command   => "git clone -b master git://github.com/bobthecow/genghis.git ${app_root}",
     creates   => $app_root,
+    require   => Service['mongod'],
   }
 
 }
