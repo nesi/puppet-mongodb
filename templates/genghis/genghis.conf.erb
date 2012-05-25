@@ -1,14 +1,11 @@
 <VirtualHost *:80>
     ServerAdmin root@localhost
     DocumentRoot <%= web_root %>
-    <Location /genghis>
-        <Directory <%= app_root %>>
-            DirectoryIndex genghis.php
-            Allow from all
-            Options -MultiViews
-        </Directory>
+    <Directory <%= app_root %>>
+        DirectoryIndex genghis.php
+        Allow from all
         ErrorLog /var/log/httpd/genghis_error.log
         LogLevel warn
         CustomLog /var/log/httpd/genghis_access.log combined
-    </Location>
+    </Directory>
 </VirtualHost>
