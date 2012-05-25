@@ -9,6 +9,7 @@ class mongodb::web::genghis::download(
   exec{'get_genghis':
     cwd       => $web_root,
     user      => root,
+    path      => ['/usr/bin'],
     command   => "git clone -b master git://github.com/bobthecow/genghis.git ${app_root}",
     creates   => $app_root,
     require   => Service['mongod'],
