@@ -34,7 +34,16 @@ class mongodb::install(
     path    => '/etc/mongodb.conf',
     content => template('mongodb/mongodb.conf.erb'),
     require => File[$data_dir, $log_file],
-    # notify  => Service['mongod'],
+    notify  => Service['mongod'],
+  }
+
+  service{"mongod":
+    name => "mongod",
+    require => [Package["mongodb-server"],File[$data_dir,$log_file,'mongdb_conf']],
+    ensure => running,
+    enable => true,
+    hasstatus => true,
+    hasrestart => true,
   }
 
 }
