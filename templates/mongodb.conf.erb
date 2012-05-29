@@ -98,3 +98,9 @@ auth = true
 #oplogSize = <MB>
 # Size limit for in-memory storage of op ids.
 #opIdMem = <bytes>
+
+# Journaling is disabled by default
+# journal = true
+<% if journaling then -%>
+journal = true
+<% end -%>

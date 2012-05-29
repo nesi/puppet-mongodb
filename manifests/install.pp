@@ -6,7 +6,8 @@ class mongodb::install(
   $data_dir,
   $log_dir,
   $bind_ip,
-  $auth
+  $auth,
+  $journaling
 ){
   
   package{'mongodb-server': ensure => installed}
