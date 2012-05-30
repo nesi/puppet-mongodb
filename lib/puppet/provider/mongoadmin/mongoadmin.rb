@@ -7,6 +7,12 @@ Puppet::Type.type(:mongoadmin).provide(:ruby) do
     output =~ /"user" : "#{self[:admin]}",/
   end
 
+  def create
 
+  end
+
+  def destroy
+
+  end
 
 end
