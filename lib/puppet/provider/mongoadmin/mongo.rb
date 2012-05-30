@@ -1,5 +1,7 @@
 Puppet::Type.type(:mongoadmin).provide :mongo do
 
+  defaultfor :operatingsystem => :centos
+
   def exists?
     output = `echo 'show users'|mongo -u #{@resource[:admin]} -p #{@resource[:password]} #{@resource[:host]}:#{@resource[:port]}/admin}`
     result = $?.success?
