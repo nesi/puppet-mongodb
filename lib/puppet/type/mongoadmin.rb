@@ -9,6 +9,7 @@ Puppet::Type.newtype(:mongoadmin) do
     validate do |value|
       unless value =~ /^(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}|(\d{1,3}\.){3}\d{1,3})$/
         raise ArgumentError, "$s is not a valid hostname" % value
+      end
     end
 
     munge do |value|
