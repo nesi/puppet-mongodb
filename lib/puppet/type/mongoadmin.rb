@@ -1,7 +1,10 @@
 Puppet::Type.newtype(:mongoadmin) do
   @doc = "Create a mongo administrator."
 
-  ensurable
+  ensurable do
+    defaultvalues
+    defalutto :present
+  end
 
   newparam(:host) do
     desc      "The name of the database server hosting this database. (Accepts 'localhost', a FQDN, or IP address.)"
@@ -48,13 +51,6 @@ Puppet::Type.newtype(:mongoadmin) do
         raise ArgumentError, "%s is not a password name" % value
       end
     end
-  end
-
-  def exists?
-    output = `echo 'show users'|mongo -u #{self[:admin]} -p #{self[:password]} #{self[:host]}:#{self[:port]}/admin}`
-    result = $?.success?
-    return false unless result
-    output =~ /"user" : "#{self[:admin]}",/
   end
 
 end
