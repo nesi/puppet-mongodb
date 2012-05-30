@@ -1,4 +1,4 @@
-Puppet::Type.newtype(:mongoadmin)
+Puppet::Type.newtype(:mongoadmin) do
   @doc = "Create a mongo administrator."
 
   ensurable
