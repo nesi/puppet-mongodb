@@ -3,7 +3,7 @@ Puppet::Type.newtype(:mongoadmin) do
 
   ensurable do
     defaultvalues
-    defalutto :present
+    defaultto :present
   end
 
   newparam(:host) do
