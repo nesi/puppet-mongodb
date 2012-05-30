@@ -32,7 +32,7 @@ Puppet::Type.newtype(:mongoadmin) do
     end
   end
 
-  newparm(:admin) do
+  newparam(:admin) do
     desc "The user who is the administrator of the databse. (Only word characters and underscores are accepted. Minimum length, 5 characters)"
     validate do |value|
       unless value =~ /^\w{5,}$/
@@ -41,7 +41,7 @@ Puppet::Type.newtype(:mongoadmin) do
     end
   end
 
-  newparm(:password) do
+  newparam(:password) do
     desc "The administrator user's password (Only alphanumeric characters and underscores are accepted. Minimum length, 5 characters)"
     validate do |value|
       unless value =~ /^(\w|\d){5,}$/
