@@ -1,4 +1,4 @@
-Puppet::Type.type(:mongoadmin).provide :mongo, parent => Puppet::Provider do
+Puppet::Type.type(:mongoadmin).provide :mongo, :parent => Puppet::Provider do
 
   def exists?
     output = `echo 'show users'|mongo -u #{@resource[:admin]} -p #{@resource[:password]} #{@resource[:host]}:#{@resource[:port]}/admin}`
