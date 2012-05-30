@@ -1,3 +1,5 @@
+require 'puppet/type'
+
 Puppet::Type.newtype(:mongoadmin) do
   @doc = "Create a mongo administrator."
 
