@@ -5,7 +5,7 @@
 class mongodb(
   $data_dir   = '/var/lib/mongodb',
   $log_dir    = '/var/log/mongodb',
-  $bind_ip    = '127.0.0.1',
+  $bind_ip    = false,
   $auth       = false,
   $journaling = false
 ){
