@@ -65,7 +65,7 @@ class mongodb(
           'Debian' => 'debian-sysvinit',
         }
 
-        apt::source { '10gen':
+        apt::source { 'mongodb_10gen':
           location          => "http://downloads-distro.mongodb.org/repo/${os_repo}",
           release           => 'dist',
           repos             => '10gen',
