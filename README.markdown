@@ -2,6 +2,15 @@
 
 This is a mongodb puppet module.
 
+# 10Gen repositories
+
+It is strongly recommended that MongoDB be installed from the 10gen repositories.
+
+# Dependencies
+
+* [stdlib](https://github.com/puppetlabs/puppetlabs-stdlib)
+* [apt](https://github.com/puppetlabs/puppetlabs-apt) if using Debian based Linux
+
 # Licensing
 
 Update your license details here.

@@ -31,24 +31,66 @@
 # sharding is the secret ingredient in the web-scale sauce!
 # http://www.xtranormal.com/watch/6995033/mongo-db-is-web-scale
 class mongodb(
-  $data_dir   = '/var/lib/mongodb',
-  $log_dir    = '/var/log/mongodb',
-  $bind_ip    = false,
-  $auth       = false,
-  $journaling = false
-){
-  case $operatingsystem{
-    CentOS:{
-      class{"mongodb::install":
-        data_dir    => $data_dir,
-        log_dir     => $log_dir,
-        bind_ip     => $bind_ip,
-        auth        => $auth,
-        journaling  => $journaling,
+  $data_dir    = $mongodb::params::data_dir,
+  $log_dir     = $mongodb::params::data_dir,
+  $use_10gen   = true,
+  $bind_ip     = undef,
+  $auth        = undef,
+  $journaling  = undef
+) inherits mongodb::params {
+
+  validate_bool($use_10gen)
+  
+  if $use_10gen {
+
+    $packages = $mongodb::params::packages_10gen
+
+    package{$mongdb::params::dis_packages: 
+      ensure => absent,
+    }
+
+    case $::osfamily {
+      RedHat:{
+        yumrepo { "10gen":
+          baseurl => "http://downloads-distro.mongodb.org/repo/redhat/os/${::hardwaremodel}",
+          descr => "The 10gen repository for installing MongoDB",
+          enabled => "1",
+          gpgcheck => "0",
+        }
+      }
+      Debian:{
+
+        $os_repo = $::operatingsystem ? {
+          'Ubuntu' => 'ubuntu-upstart',
+          'Debian' => 'debian-sysvinit',
+        }
+
+        apt::key { 'puppetlabs':
+          key        => '7F0CEB10',
+          key_server => 'keyserver.ubuntu.com',
+        }
+
+        apt::source { '10gen':
+          location          => "http://downloads-distro.mongodb.org/repo/${os_repo}",
+          release           => 'dist',
+          repos             => '10gen',
+          required_packages => 'debian-keyring debian-archive-keyring',
+          key               => '7F0CEB10',
+          key_server        => 'keyserver.ubuntu.com',
+        }
+        
+      }
+      default:{
+        fail{"MongoDB not configured for ${::osfamily} on ${::fqdn}":}
       }
     }
-    default:{
-      warning("MongoDB not configured for ${operatingsystem}")
+  } else {
+    $packages = $mongodb::params::packages_dists
+    package{$mongodb::params::packages_10gen:
+      ensure => absent,
+    }
+    if $::osfamily == RedHat {
+      fail{'MongoDB must be installed from the 10gen repository, set `use_10gen => true` parameter.':}
     }
   }
 }
