@@ -65,11 +65,6 @@ class mongodb(
           'Debian' => 'debian-sysvinit',
         }
 
-        apt::key { 'puppetlabs':
-          key        => '7F0CEB10',
-          key_server => 'keyserver.ubuntu.com',
-        }
-
         apt::source { '10gen':
           location          => "http://downloads-distro.mongodb.org/repo/${os_repo}",
           release           => 'dist',
