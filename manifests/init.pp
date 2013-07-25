@@ -69,7 +69,6 @@ class mongodb(
           location          => "http://downloads-distro.mongodb.org/repo/${os_repo}",
           release           => 'dist',
           repos             => '10gen',
-          required_packages => 'debian-keyring debian-archive-keyring',
           key               => '7F0CEB10',
           key_server        => 'keyserver.ubuntu.com',
         }
