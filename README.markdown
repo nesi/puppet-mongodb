@@ -1,8 +1,6 @@
-# blank
+# mongodb
 
-This is a blank puppet module.
-
-*NOTE:* Check README1st.markdown for usage of the blank puppet module template.
+This is a mongodb puppet module.
 
 # Licensing
 
