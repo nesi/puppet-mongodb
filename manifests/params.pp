@@ -1,4 +1,4 @@
-class mongdb::params {
+class mongodb::params {
   $data_dir   = '/var/lib/mongodb'
   $log_dir    = '/var/log/mongodb'
   case $::osfamily{
